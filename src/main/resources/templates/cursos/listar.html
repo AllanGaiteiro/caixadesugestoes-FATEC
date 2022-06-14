@@ -57,36 +57,16 @@
         </div>
       </div>
     </nav>
-    <!-- Criar Formulário para Inclusão de Curso-->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
-          <form
-            th:action="@{/cursos/salvar}"
-            method="post"
-            th:object="${curso}"
-          >
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{nome}"
-                placeholder="Recipient's username"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="submit"
-                id="button-addon2"
-              >
-                Button
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <main class="container">
+      <h1>Listar Cursos</h1>
+      <ul class="list-group">
+        <li
+          th:each="curso:${cursos}"
+          class="list-group-item disabled"
+          th:text="${curso.nome}"
+        ></li>
+      </ul>
+    </main>
     <script th:src="@{../js/bootstrap.min.js}"></script>
   </body>
 </html>
