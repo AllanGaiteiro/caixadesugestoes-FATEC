@@ -41,28 +41,28 @@
           </div>
         </div>
       </nav>
-    <main class="container-fluid">
+      <main class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
-                <div class="card shadow my-3">
+                <div th:each="sugestao: ${sugestoes}" class="card shadow my-3">
                     <div class="row g-0">
                         <div class="col-sm-3 col-md-2 col-lg-1">
-                            <span class="fa-solid fa-lightbulb fa-3x ms-3 mt-3"></span>
+                            <span class="fa-3x ms-3 mt-3 fa-solid fa-lightbulb"
+                            th:classappend="(${sugestao.tipo.id == 1 } ? 'fa-comment' : '') + 
+                            (${sugestao.tipo.id == 2 } ? 'fa-heart-crack' : '') + 
+                            (${sugestao.tipo.id == 3 } ? 'fa-lightbulb' : '') +
+                            (${sugestao.tipo.id == 4 } ? 'fa-heart' : '')"></span>
                         </div>
                         <div class="col-sm-8">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title" th:text="${sugestao.tipo.descricao}"></h5>
+                                <p class="card-text" th:text="${sugestao.conteudo}"></p>
                                 <div class="row">
-                                    <div class="col-5">
-                                        Administração
-                                    </div>
-                                    <div class="col-4">
-                                        José carlos
+                                    <div class="col-5" th:text="${sugestao.curso.nome}"></div>
+                                    <div class="col-4" th:text="${sugestao.autor}">
                                     </div>
                                     <div class="col-3">
-                                        <span class="card-text"><small class="text-muted">07/06/2022</small></span>
+                                        <span class="card-text"><small th:text="${sugestao.data}" class="text-muted"></small></span>
                                     </div>
                                 </div>
                             </div>
