@@ -14,9 +14,9 @@ public class SugestaoService {
    private SugestaoRepository repository;
 
    public List<Sugestao> buscarTodos() {
-      List<Sugestao> sugestao = new ArrayList<>();
-      sugestao = repository.findAll();
-      return sugestao;
+      List<Sugestao> sugestoes = new ArrayList<>();
+      sugestoes = repository.findAll();
+      return sugestoes;
    }
 
    public void salvar(Sugestao sugestao) {

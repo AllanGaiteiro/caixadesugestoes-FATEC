@@ -67,28 +67,50 @@
       <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
           <form
-            th:action="@{/cursos/salvar}"
+            th:action="@{/sugestoes/salvar}"
             method="post"
-            th:object="${curso}"
+            th:object="${sugestao}"
           >
-            <h1>Adicionar Curso</h1>
-            <div class="input-group mb-3">
+            <h1>Adicionar Sugestão</h1>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nome</label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
-                th:field="*{nome}"
-                placeholder="Recipient's username"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
+                id="nome"
+                th:field="*{autor}"
+                placeholder="digite seu nome..."
               />
-              <button
-                class="btn btn-outline-secondary"
-                type="submit"
-                id="button-addon2"
-              >
-                Button
-              </button>
             </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Tipo</label>
+              <select class="form-control form-control-lg"
+              th:field="*{tipo}">
+                <option>Select tipo</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Tipo</label>
+              <select class="form-control form-control-lg"
+              th:field="*{curso}">
+                <option>Select curso</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Conteudo</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                th:field="*{conteudo}"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
           </form>
         </div>
       </div>

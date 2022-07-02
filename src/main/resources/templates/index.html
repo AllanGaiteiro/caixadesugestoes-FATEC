@@ -1,79 +1,118 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{css/custom.css}">
-    <link rel="stylesheet" th:href="@{css/fontawesome.css}">
-</head>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{css/custom.css}" />
+    <link rel="stylesheet" th:href="@{css/fontawesome.css}" />
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Caixa de Sugestões</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Caixa de Sugestões</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cursos/listar">Cursos</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarScrollingDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Config
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarScrollingDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" th:href="@{/cursos/adicionar}"
+                    >Cursos</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" th:href="@{sugestoes/adicionar}"
+                    >Sugestão</a
+                  >
+                </li>
+                <li><a class="dropdown-item" href="#">Tipo Sugestão</a></li>
+              </ul>
+            </li>
+          </ul>
+          <button
+            class="btn btn-outline-primary"
+            type="submit"
+          >
+            Criar
           </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/cursos/listar">Cursos</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Config
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a class="dropdown-item" href="/cursos/adicionar">Cursos</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Tipo Sugestão</a></li>
-                </ul>
-              </li>
-            </ul>
-              <button class="btn btn-outline-primary" type="submit">Criar</button>
+        </div>
+      </div>
+    </nav>
+    <main class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
+          <div th:each="sugestao: ${sugestoes}" class="card shadow my-3">
+            <div class="row g-0">
+              <div class="col-sm-3 col-md-2 col-lg-1">
+                <span
+                  class="fa-3x ms-3 mt-3 fa-solid fa-lightbulb"
+                  th:classappend="(${sugestao.tipo.id == 1 } ? 'fa-comment' : '') + 
+                          (${sugestao.tipo.id == 2 } ? 'fa-heart-crack' : '') + 
+                          (${sugestao.tipo.id == 3 } ? 'fa-lightbulb' : '') +
+                          (${sugestao.tipo.id == 4 } ? 'fa-heart' : '')"
+                ></span>
+              </div>
+              <div class="col-sm-8">
+                <div class="card-body">
+                  <h5
+                    class="card-title"
+                    th:text="${sugestao.tipo.descricao}"
+                  ></h5>
+                  <p class="card-text" th:text="${sugestao.conteudo}"></p>
+                  <div class="row">
+                    <div class="col-5" th:text="${sugestao.curso.nome}"></div>
+                    <div class="col-4" th:text="${sugestao.autor}"></div>
+                    <div class="col-3">
+                      <span class="card-text"
+                        ><small
+                          th:text="${sugestao.data}"
+                          class="text-muted"
+                        ></small
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-      <main class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
-                <div th:each="sugestao: ${sugestoes}" class="card shadow my-3">
-                    <div class="row g-0">
-                        <div class="col-sm-3 col-md-2 col-lg-1">
-                            <span class="fa-3x ms-3 mt-3 fa-solid fa-lightbulb"
-                            th:classappend="(${sugestao.tipo.id == 1 } ? 'fa-comment' : '') + 
-                            (${sugestao.tipo.id == 2 } ? 'fa-heart-crack' : '') + 
-                            (${sugestao.tipo.id == 3 } ? 'fa-lightbulb' : '') +
-                            (${sugestao.tipo.id == 4 } ? 'fa-heart' : '')"></span>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${sugestao.tipo.descricao}"></h5>
-                                <p class="card-text" th:text="${sugestao.conteudo}"></p>
-                                <div class="row">
-                                    <div class="col-5" th:text="${sugestao.curso.nome}"></div>
-                                    <div class="col-4" th:text="${sugestao.autor}">
-                                    </div>
-                                    <div class="col-3">
-                                        <span class="card-text"><small th:text="${sugestao.data}" class="text-muted"></small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </main>
     <script th:src="@{js/bootstrap.min.js}"></script>
     <script th:src="@{js/all.js}"></script>
-</body>
-
+  </body>
 </html>
